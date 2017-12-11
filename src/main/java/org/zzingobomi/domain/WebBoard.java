@@ -37,4 +37,5 @@ public class WebBoard {
 	private Timestamp regdate;
 	@UpdateTimestamp
 	private Timestamp updatedate;
+	
 }

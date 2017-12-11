@@ -43,7 +43,7 @@ public class WebBoardRepositoryTests {
 		});
 	}
 	
-	
+	/*
 	@Test
 	public void testList1() {
 		Pageable pageable = PageRequest.of(0, 20, Direction.DESC, "bno");
@@ -68,5 +68,5 @@ public class WebBoardRepositoryTests {
 		log.info("-------------------------------");
 		result.getContent().forEach(board -> log.info("" + board));
 	}
-	
+	*/
 }
