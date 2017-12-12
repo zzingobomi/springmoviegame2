@@ -4,25 +4,23 @@
 
 	<div layout:fragment="content">
 		
-		<div class="container">
+		<div class="container">			
 		
 			<div class="form-group col-lg-12 mt-4">
               	<div class="clearfix">			
-					<div class="btn btn-secondary float-right">
-	    				<a th:href="@{register}">Register</a>
+					<div class="float-right">
+	    				<a class="btn btn-secondary" th:href="@{register}">Register</a>
 	    			</div>
     			</div>
             </div>
-			
-			<!-- 
-			<div class="clearfix">			
-				<div class="btn btn-secondary float-right">
-    				<a class="label label-default" th:href="@{register}">Register</a>
-    			</div>
-    		</div>
-    		-->
 		
 			<div class="bg-faded p-4 my-4">
+			
+				<hr class="divider">
+        			<h2 class="text-center text-lg text-uppercase my-0">
+          				<strong>Board</strong>
+        			</h2>
+        		<hr class="divider">
 			
 				<div th:with="result=${result.result}">   
 			

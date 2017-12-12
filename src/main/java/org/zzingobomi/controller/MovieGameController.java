@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.java.Log;
 
 @Controller
-@RequestMapping("/contact/")
+@RequestMapping("/moviegame/")
 @Log
-public class ContactController {
+public class MovieGameController {
 	
-	@GetMapping("/zzingobomi")
-	public String contact() {
+	@GetMapping("/list")
+	public String list() {
 		
-		log.info("Contact Request!!");
+		log.info("MovieGame Request!!");
 		
-		return "/contact/contact";
+		return "/moviegame/list";
 	}
+
 }

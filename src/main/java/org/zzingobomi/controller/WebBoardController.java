@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zzingobomi.domain.WebBoard;
 import org.zzingobomi.persistence.WebBoardRepository;
@@ -28,7 +29,7 @@ public class WebBoardController {
 	
 	
 	@GetMapping("/list")
-	public void list(@ModelAttribute("pageVO") PageVO vo, Model model) {
+	public ModelAndView list(@ModelAttribute("pageVO") PageVO vo) {
 		
 		Pageable page = vo.makePageable(0, "bno");
 		
@@ -37,14 +38,23 @@ public class WebBoardController {
 		log.info("" + page);
 		log.info("" + result);
 		
-		log.info("TOTAL PAGE NUMBER: " + result.getTotalPages());
+		log.info("TOTAL PAGE NUMBER: " + result.getTotalPages());		
 		
-		model.addAttribute("result", new PageMaker(result));
+		ModelAndView modelAndView = new ModelAndView("/boards/boardslist");
+		modelAndView.addObject("result", new PageMaker(result));
+		return modelAndView;
+		
+		//model.addAttribute("result", new PageMaker(result));
+		//modelAndView.addObject("result", new PageMaker(result));
+		//modelAndView.setViewName("list");		
 	}	
 	
 	@GetMapping("/register")
-	public void registerGET(@ModelAttribute("vo")WebBoard vo) {
+	public ModelAndView registerGET(@ModelAttribute("vo")WebBoard vo) {		
 		log.info("register get");
+		
+		ModelAndView modelAndView = new ModelAndView("/boards/boardsregister");
+		return modelAndView;
 	}
 	
 	@PostMapping("/register")
@@ -55,23 +65,31 @@ public class WebBoardController {
 		repo.save(vo);
 		rttr.addFlashAttribute("msg", "success");		
 		
-		return "redirect:/boards/list";
+		return "redirect:/boards/boardslist";
 	}
 	
 	@GetMapping("/view")
-	public void view(Long bno, @ModelAttribute("pageVO") PageVO vo, Model model	) {
+	public ModelAndView view(Long bno, @ModelAttribute("pageVO") PageVO vo) {
 		
 		log.info("BNO: " + bno);
 		
-		repo.findById(bno).ifPresent(board -> model.addAttribute("vo", board));
+		ModelAndView modelAndView = new ModelAndView("/boards/boardsview");
+		
+		repo.findById(bno).ifPresent(board -> modelAndView.addObject("vo", board));
+		
+		return modelAndView;
 	}
 	
 	@GetMapping("/modify")
-	public void modify(Long bno, @ModelAttribute("pageVO") PageVO vo, Model model) {
+	public ModelAndView modify(Long bno, @ModelAttribute("pageVO") PageVO vo) {
 		
 		log.info("MODIFY BNO: " + bno);
 		
-		repo.findById(bno).ifPresent(board -> model.addAttribute("vo", board));
+		ModelAndView modelAndView = new ModelAndView("/boards/boardsmodify");
+		
+		repo.findById(bno).ifPresent(board -> modelAndView.addObject("vo", board));
+		
+		return modelAndView;
 	}
 	
 	@PostMapping("/modify")
@@ -92,7 +110,7 @@ public class WebBoardController {
 		rttr.addAttribute("type", vo.getType());
 		rttr.addAttribute("keyword", vo.getKeyword());		
 		
-		return "redirect:/boards/view";
+		return "redirect:/boards/boardsview";
 	}
 	
 	@PostMapping("/delete")
@@ -109,6 +127,6 @@ public class WebBoardController {
 		rttr.addAttribute("type", vo.getType());
 		rttr.addAttribute("keyword", vo.getKeyword());		
 		
-		return "redirect:/boards/list";
+		return "redirect:/boards/boardslist";
 	}
 }

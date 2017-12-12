@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout1}">
+	
+	<div layout:fragment="content">
+		
+		<div class="container">
+
+      		<div class="bg-faded p-4 my-4">
+        		<hr class="divider">
+        		<h2 class="text-center text-lg text-uppercase my-0">
+          			<strong>Movie Game</strong>
+        		</h2>
+        		<hr class="divider">
+        		
+      		</div>      		
+
+    	</div>
+    	<!-- /.container -->		
+		
+	</div>
+	<!-- end fragment -->
+	
+	<th:block layout:fragment="script">
+	
+	<script th:inline="javascript">
+		$(window).on('load', function() {
+			
+			
+		});
+	
+		$(document).ready(function() {
+			
+		});
+	</script>
+	
+	</th:block>
+	
+	
