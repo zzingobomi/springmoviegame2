@@ -65,7 +65,7 @@ public class WebBoardController {
 		repo.save(vo);
 		rttr.addFlashAttribute("msg", "success");		
 		
-		return "redirect:/boards/boardslist";
+		return "redirect:/boards/list";
 	}
 	
 	@GetMapping("/view")
@@ -110,7 +110,7 @@ public class WebBoardController {
 		rttr.addAttribute("type", vo.getType());
 		rttr.addAttribute("keyword", vo.getKeyword());		
 		
-		return "redirect:/boards/boardsview";
+		return "redirect:/boards/view";
 	}
 	
 	@PostMapping("/delete")
@@ -127,6 +127,6 @@ public class WebBoardController {
 		rttr.addAttribute("type", vo.getType());
 		rttr.addAttribute("keyword", vo.getKeyword());		
 		
-		return "redirect:/boards/boardslist";
+		return "redirect:/boards/list";
 	}
 }

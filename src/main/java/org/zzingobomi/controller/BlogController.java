@@ -16,6 +16,6 @@ public class BlogController {
 		
 		log.info("Blog Request!!");
 		
-		return "/blog/blog";
+		return "/blog/bloglist";
 	}
 }

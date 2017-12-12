@@ -16,7 +16,7 @@ public class MovieGameController {
 		
 		log.info("MovieGame Request!!");
 		
-		return "/moviegame/list";
+		return "/moviegame/moviegamelist";
 	}
 
 }
