@@ -13,41 +13,32 @@
         		</h2>
         		<hr class="divider">
         		
-        		<div class="row">
-          			<div class="col-md-4 mb-4 mb-md-0">
-            			<div class="card h-100">
-              				<img class="card-img-top" src="http://placehold.it/600x800" alt="">
-              				<div class="card-body text-center">
-                				<h4 class="card-title m-0">John Smith
-                  					<small class="text-muted">Job Title</small>
-                				</h4>
-              				</div>
-            			</div>
-          			</div>
-          			<div class="col-md-4 mb-4 mb-md-0">
-            			<div class="card h-100">
-              				<img class="card-img-top" src="http://placehold.it/600x800" alt="">
-              				<div class="card-body text-center">
-                				<h4 class="card-title m-0">John Smith
-                  					<small class="text-muted">Job Title</small>
-                				</h4>
-              				</div>
-            			</div>
-          			</div>
-          			<div class="col-md-4">
-            			<div class="card h-100">
-              				<img class="card-img-top" src="http://placehold.it/600x800" alt="">
-              				<div class="card-body text-center">
-                				<h4 class="card-title m-0">John Smith
-                  					<small class="text-muted">Job Title</small>
-                				</h4>
-              				</div>
-            			</div>
-          			</div>
-        		</div>
+        		<div th:with="result=${result.result}">
         		
-      		</div>      		
-
+        			<div class="row">        			
+        			
+	        			<div class="col-md-4 mb-4 mb-md-4" th:each="movieitem:${result.content}">
+	            			<div class="card h-100">
+	              				<img class="card-img-top" src="http://placehold.it/450x600" alt="">              				      				
+	              				<div class="card-body text-center">
+	                				<h4 class="card-title">[[${movieitem.title}]]</h4>
+	                				<p class="card-text">[[${movieitem.description}]]</p>
+	                				<a th:href="${movieitem.mno}" class="btn btn-secondary movieitemLink">See MovieGame</a>
+	                			</div>   
+	            			</div>
+	          			</div>
+	          			
+        			</div><!-- .row -->   
+        			
+        		</div><!-- .th:with="result=${result.result}" --> 
+        		
+        		<form id="f1" th:action="@{list}" method="get">
+        			<input type="hidden" name="page" th:value=${result.currentPageNum}>
+        			<input type="hidden" name="size" th:value=${result.currentPage.pageSize}>
+        			<input type="hidden" name="type" th:value=${pageVO.type}>
+        			<input type="hidden" name="keyword" th:value=${pageVO.keyword}>
+      			</form>         		
+      		</div><!-- .bg-faded p-4 my-4 -->  
     	</div>
     	<!-- /.container -->		
 		
@@ -60,11 +51,40 @@
 		$(window).on('load', function() {
 			
 			
-		});
-	
+		});	
+		
 		$(document).ready(function() {
+			var formObj = $("#f1");
 			
-		});
+			$(".pagination a").click(function(e) {
+				e.preventDefault();
+				formObj.find('[name="page"]').val( $(this).attr('href'));
+				formObj.submit();
+			});
+			
+			$("#searchBtn").click(function(e) {
+				var typeStr = $("#searchType").find(":selected").val();
+				var keywordStr = $("#searchKeyword").val();
+				
+				console.log(typeStr, "" , keywordStr);
+				
+				formObj.find("[name='type']").val(typeStr);
+				formObj.find("[name='keyword']").val(keywordStr);
+				formObj.find("[name='page']").val(1);
+				formObj.submit();
+			});
+			
+			$(".movieitemLink").click(function(e) {
+				e.preventDefault();
+				
+				var movieitemNo = $(this).attr("href");
+				
+				formObj.attr("action", [[@{'/moviegame/view'}]]);
+				formObj.append("<input type='hidden' name='mno' value='" + movieitemNo + "'>");
+				
+				formObj.submit();
+			});
+		});		
 	</script>
 	
 	</th:block>

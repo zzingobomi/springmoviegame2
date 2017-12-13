@@ -22,7 +22,7 @@ public class MovieGameItemRepositoryTests {
 	
 	
 	@Test
-	public void insertMovieGameItemDummies() {
+	public void insertMovieGameItemDummies() {		
 		
 		// Sample
 		MovieGameItem movie1 = new MovieGameItem();
@@ -47,6 +47,26 @@ public class MovieGameItemRepositoryTests {
 		movie3.setDescription("This is Tutorial");
 		
 		repo.save(movie3);
+		
+		
+		// Sample4
+		MovieGameItem movie4 = new MovieGameItem();
+		movie4.setTitle("Sample4");
+		movie4.setDirector("zzingo4");
+		movie4.setDescription("This is 4");
+		
+		repo.save(movie4);
+		
+		// Sample4
+		MovieGameItem movie5 = new MovieGameItem();
+		movie5.setTitle("Sample5");
+		movie5.setDirector("zzingo5");
+		movie5.setDescription("This is 5");
+		
+		repo.save(movie5);
+				
+				
+				
 	
 	}
 }

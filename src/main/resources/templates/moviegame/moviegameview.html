@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout1}">
+	
+<div layout:fragment="content">
+
+	<div class="container">			
+		
+		<div class="bg-faded p-4 my-4">
+		
+			<hr class="divider">
+        		<h2 class="text-center text-lg text-uppercase my-0">
+          			<strong>MovieGame View</strong>
+        		</h2>
+        	<hr class="divider">
+		
+			<div class="form-group">
+				<label>MNO</label><input class="form-control" name="mno" th:value="${vo.mno}" readonly="readonly" />
+				<p class="help-block">Title text here.</p>					
+			</div>			
+			
+			<div class="form-group">
+				<label>Title</label><input class="form-control" name="title" th:value="${vo.title}" readonly="readonly" />
+				<p class="help-block">Title text here.</p>					
+			</div>
+			
+			<div class="form-group">
+				<label>Description</label>
+				<textarea class="form-control" rows="3" name="description" th:text="${vo.description}" readonly="readonly"></textarea>							
+			</div>
+			
+			<div class="form-group">
+				<label>Director</label><input class="form-control" name="director" th:value="${vo.director}" readonly="readonly" />
+				<p class="help-block">Title text here.</p>					
+			</div>
+			
+			<div class="clearfix">
+				<div class="float-right">					
+					<a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${vo.mno}) }" class="btn btn-primary">Go List</a>
+				</div>		
+			</div>
+		
+		</div><!-- .bg-faded p-4 my-4 -->
+	</div><!-- .container -->
+	
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+	
+	</script>
+</th:block>

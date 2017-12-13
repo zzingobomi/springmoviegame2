@@ -4,15 +4,7 @@
 
 	<div layout:fragment="content">
 		
-		<div class="container">			
-		
-			<div class="form-group col-lg-12 mt-4">
-              	<div class="clearfix">			
-					<div class="float-right">
-	    				<a class="btn btn-secondary" th:href="@{register}">Register</a>
-	    			</div>
-    			</div>
-            </div>
+		<div class="container">		
 		
 			<div class="bg-faded p-4 my-4">
 			
@@ -43,17 +35,26 @@
 	          			</tbody>       
 					</table>	
 					
-					<div>
-          				<select id="searchType">
-            				<option>--</option>
-				            <option value="t" th:selected="${pageVO.type} == 't'">Title</option>
-				            <option value="c" th:selected="${pageVO.type} == 'c'">Content</option>
-				            <option value="w" th:selected="${pageVO.type} == 'w'">Writer</option>
-				      	</select>
-				        <input type="text" id="searchKeyword" th:value="${pageVO.keyword}">
-				        <button id="searchBtn">Search</button>
-					</div>					
-					
+					<div class="row">
+						<div class="col-md-8 mt-4">
+	          				<select id="searchType">
+	            				<option>--</option>
+					            <option value="t" th:selected="${pageVO.type} == 't'">Title</option>
+					            <option value="c" th:selected="${pageVO.type} == 'c'">Content</option>
+					            <option value="w" th:selected="${pageVO.type} == 'w'">Writer</option>
+					      	</select>
+					        <input type="text" id="searchKeyword" th:value="${pageVO.keyword}">
+					        <button id="searchBtn">Search</button>
+						</div>	
+						
+						<div class="col-md-4 mt-4">
+			              	<div class="clearfix">			
+								<div class="float-right">
+				    				<a class="btn btn-secondary" th:href="@{register}">Register</a>
+				    			</div>
+			    			</div>
+			            </div>				
+					</div>
 				</div><!-- th:with="result=${result.result}" -->      	
 				
 				<!-- paging -->
@@ -95,8 +96,7 @@
 		$(window).on('load', function() {
 			var msg = [[${msg}]];
 			console.log(msg);
-			if(msg == 'success') {
-				//alert('�젙�긽�쟻�쑝濡� 泥섎━�릺�뿀�뒿�땲�떎.');
+			if(msg == 'success') {				
 				var stateObj = { msg: "" };
 			}
 			

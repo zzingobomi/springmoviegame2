@@ -15,7 +15,7 @@ import lombok.extern.java.Log;
 @Log
 public class PageMaker<T> {
 
-private Page<T> result;
+	private Page<T> result;
 	
 	private Pageable prevPage;
 	private Pageable nextPage;
