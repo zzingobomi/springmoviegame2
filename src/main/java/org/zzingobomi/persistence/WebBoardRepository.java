@@ -10,7 +10,7 @@ import com.querydsl.core.types.Predicate;
 
 public interface WebBoardRepository extends CrudRepository<WebBoard, Long>, QuerydslPredicateExecutor<WebBoard> {
 	
-public default Predicate makePredicate(String type, String keyword) {
+	public default Predicate makePredicate(String type, String keyword) {
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		QWebBoard board = QWebBoard.webBoard;		

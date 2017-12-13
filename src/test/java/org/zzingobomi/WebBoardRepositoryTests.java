@@ -41,6 +41,7 @@ public class WebBoardRepositoryTests {
 			repo.save(board);
 			
 		});
+		
 	}
 	
 	/*
