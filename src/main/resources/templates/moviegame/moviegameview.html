@@ -32,10 +32,15 @@
 			<div class="form-group">
 				<label>Director</label><input class="form-control" name="director" th:value="${vo.director}" readonly="readonly" />
 				<p class="help-block">Title text here.</p>					
-			</div>
+			</div>					
+			
+			
+			<video id="moviegameoutline" class="embed-responsive embed-responsive-16by9" controls>
+				
+			</video>
 			
 			<div class="clearfix">
-				<div class="float-right">					
+				<div class="float-right mt-4">					
 					<a th:href="@{ list(page=${pageVO.page}, size=${pageVO.size}, type=${pageVO.type}, keyword=${pageVO.keyword}, mno=${vo.mno}) }" class="btn btn-primary">Go List</a>
 				</div>		
 			</div>
@@ -48,6 +53,27 @@
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
-	
+		$(window).on('load', function() {		
+			
+		});	
+		
+		$(document).ready(function() {	
+			
+			$.ajax({
+				type: 'get',
+				url: "/movieitemname/" + [[${vo.startmfno}]],				
+				success: function(data) {					
+					$("#moviegameoutline").append("<source src='/movievideo/" + data + ".mp4' type='video/mp4'>");				
+				}				
+			});
+			
+			
+			// 최초 보여질 영상을 가져온다. json 으로 리턴받게 수정하면 좋을듯...
+			//$.getJSON("/hello", function(data) {
+				//console.log(data);
+			//});
+		});
+		
+		
 	</script>
 </th:block>

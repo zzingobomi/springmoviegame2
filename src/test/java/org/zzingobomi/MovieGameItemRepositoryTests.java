@@ -29,9 +29,12 @@ public class MovieGameItemRepositoryTests {
 		movie1.setTitle("Sample");
 		movie1.setDirector("zzingo");
 		movie1.setDescription("This is sample");
+		movie1.setPoster("sampleposter");
+		movie1.setStartmfno(1L);
 		
 		repo.save(movie1);
 		
+		/*
 		// InTheRoom
 		MovieGameItem movie2 = new MovieGameItem();
 		movie2.setTitle("InTheRoom");
@@ -46,27 +49,7 @@ public class MovieGameItemRepositoryTests {
 		movie3.setDirector("zzingo");
 		movie3.setDescription("This is Tutorial");
 		
-		repo.save(movie3);
-		
-		
-		// Sample4
-		MovieGameItem movie4 = new MovieGameItem();
-		movie4.setTitle("Sample4");
-		movie4.setDirector("zzingo4");
-		movie4.setDescription("This is 4");
-		
-		repo.save(movie4);
-		
-		// Sample4
-		MovieGameItem movie5 = new MovieGameItem();
-		movie5.setTitle("Sample5");
-		movie5.setDirector("zzingo5");
-		movie5.setDescription("This is 5");
-		
-		repo.save(movie5);
-				
-				
-				
-	
+		repo.save(movie3);	
+		*/
 	}
 }

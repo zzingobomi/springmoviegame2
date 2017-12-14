@@ -30,18 +30,18 @@ public class MovieFlowInfoRepositoryTests {
 	@Autowired
 	MovieFlowInfoRepository repo;
 
-	/*
+
 	@Test
 	public void insertMovieFlowInfoDummies() {	
 		
 		// Sample1
 		MovieFlowInfo movieFlowInfo1 = new MovieFlowInfo();
-		movieFlowInfo1.setFilename("sample_1");
+		movieFlowInfo1.setFilename("Chapter_01");
 		  
 		List<Long> nextfilefnos1 = new ArrayList<>(); 
 		nextfilefnos1.add(2L);
 		nextfilefnos1.add(3L); 
-		nextfilefnos1.add(4L);
+	
 		movieFlowInfo1.setNextfilefnos(nextfilefnos1);
 		  
 		repo.save(movieFlowInfo1);
@@ -49,30 +49,53 @@ public class MovieFlowInfoRepositoryTests {
 		
 		// Sample2
 		MovieFlowInfo movieFlowInfo2 = new MovieFlowInfo();
-		movieFlowInfo2.setFilename("sample_2");
+		movieFlowInfo2.setFilename("Chapter_02");
 		  
 		List<Long> nextfilefnos2 = new ArrayList<>(); 
-		nextfilefnos2.add(2L);
-		nextfilefnos2.add(3L); 
 		nextfilefnos2.add(4L);
-		nextfilefnos2.add(5L);
+		nextfilefnos2.add(5L); 
+	
 		movieFlowInfo2.setNextfilefnos(nextfilefnos2);
 		  
 		repo.save(movieFlowInfo2);
 		
 		// Sample3
 		MovieFlowInfo movieFlowInfo3 = new MovieFlowInfo();
-		movieFlowInfo3.setFilename("sample_3");
+		movieFlowInfo3.setFilename("Chapter_03");
 		  
 		List<Long> nextfilefnos3 = new ArrayList<>(); 
-		nextfilefnos3.add(2L);
-		nextfilefnos3.add(3L); 		
+		nextfilefnos3.add(6L);
+		nextfilefnos3.add(7L); 		
 		movieFlowInfo3.setNextfilefnos(nextfilefnos3);
 		  
 		repo.save(movieFlowInfo3);
+		
+		// Sample4
+		MovieFlowInfo movieFlowInfo4 = new MovieFlowInfo();
+		movieFlowInfo4.setFilename("Chapter_04");		
+		  
+		repo.save(movieFlowInfo4);
+		
+		// Sample5
+		MovieFlowInfo movieFlowInfo5 = new MovieFlowInfo();
+		movieFlowInfo5.setFilename("Chapter_05");		
+		  
+		repo.save(movieFlowInfo5);
+		
+		// Sample6
+		MovieFlowInfo movieFlowInfo6 = new MovieFlowInfo();
+		movieFlowInfo6.setFilename("Chapter_06");		
+		  
+		repo.save(movieFlowInfo6);
+		
+		// Sample7
+		MovieFlowInfo movieFlowInfo7 = new MovieFlowInfo();
+		movieFlowInfo7.setFilename("Chapter_07");		
+		  
+		repo.save(movieFlowInfo7);
 	}
-	*/
 	
+	/*
 	@Test
 	public void testRead() {
 		Optional<MovieFlowInfo> result = repo.findById(3L);
@@ -87,5 +110,5 @@ public class MovieFlowInfoRepositoryTests {
 			//}			
 		});
 	}
-	
+	*/
 }

@@ -15,12 +15,13 @@
         		
         		<div th:with="result=${result.result}">
         		
-        			<div class="row">        			
+        			<div class="row">   
         			
 	        			<div class="col-md-4 mb-4 mb-md-4" th:each="movieitem:${result.content}">
-	            			<div class="card h-100">
-	              				<img class="card-img-top" src="http://placehold.it/450x600" alt="">              				      				
-	              				<div class="card-body text-center">
+	            			<div class="card h-100">	            				
+	            				<img class="card-img-top" th:src="@{${'/img/' + movieitem.poster + '.jpg'}}" alt="">	            				
+	              				<!-- <img class="card-img-top" src="http://placehold.it/450x600" alt=""> -->              				      				
+	              				<div class="card-body text-center">	              					
 	                				<h4 class="card-title">[[${movieitem.title}]]</h4>
 	                				<p class="card-text">[[${movieitem.description}]]</p>
 	                				<a th:href="${movieitem.mno}" class="btn btn-secondary movieitemLink">See MovieGame</a>

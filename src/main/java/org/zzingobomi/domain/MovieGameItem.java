@@ -31,6 +31,9 @@ public class MovieGameItem {
 	private String director;	
 	private String description;
 	
+	private String poster;				// Image SRC
+	private Long startmfno;				// MovieFlowInfo Num 
+	
 	@CreationTimestamp
 	private Timestamp regdate;
 	@UpdateTimestamp
