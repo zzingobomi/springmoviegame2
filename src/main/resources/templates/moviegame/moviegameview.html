@@ -1,4 +1,4 @@
-ï»¿<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout1}">
 	
@@ -62,10 +62,8 @@
 		
 		$(document).ready(function() {	
 			
-			alert('í•œê¸€ê¹¨ì§');
-			
 			///
-			/// ëª¨ë°”ì¼ ì²´í¬
+			/// ¸ğ¹ÙÀÏ Ã¼Å©
 			///	
 			function checkPlatformMobile() {
 				
@@ -84,7 +82,7 @@
 			}
 			
 			///
-			/// ìµœì´ˆ ë³´ì—¬ì§ˆ ì˜ìƒ ê°€ì ¸ì˜¤ê¸°
+			/// ÃÖÃÊ º¸¿©Áú ¿µ»ó °¡Á®¿À±â
 			///
 			$.ajax({
 				type: 'get',
@@ -99,13 +97,13 @@
 			});
 			
 			///
-			/// moviegameEndedEvent ì´ë²¤íŠ¸ë¥¼ ì—°ê²°í•´ ì¤€ë‹¤.
+			/// moviegameEndedEvent ÀÌº¥Æ®¸¦ ¿¬°áÇØ ÁØ´Ù.
 			///
 			$('#moviegameoutline').on('ended', moviegameEndedEvent);		
 			
 			
 			///
-			/// MovieGameIem ì»¨íŠ¸ë¡¤ - ì¬ìƒ, ì¼ì‹œì •ì§€, ë²„íŠ¼ ì¸ë±ìŠ¤
+			/// MovieGameIem ÄÁÆ®·Ñ - Àç»ı, ÀÏ½ÃÁ¤Áö, ¹öÆ° ÀÎµ¦½º
 			///
 			$('#moviegameoutline').click(function(event) { 		
 				var curVideo = document.getElementById("moviegameoutline");  
@@ -121,7 +119,7 @@
 			          
 			        //alert((event.pageX - posX) + ' , ' + (event.pageY - posY) + ' , ' + width + ' , ' + height);    // normal
 			        if((event.pageY - posY) > (height*0.7)) {
-						// ì¬ìƒ, ì¼ì‹œì •ì§€
+						// Àç»ı, ÀÏ½ÃÁ¤Áö
 						if(curVideo.paused) {				
 							curVideo.play();
 						} else {
@@ -132,7 +130,7 @@
 						var btnTime = $('#moviegameoutline').attr('selecttime');				
 					
 						if(curVideoTime >= btnTime) {				
-							// ë²„íŠ¼ ì¸ë±ìŠ¤ êµ¬í•˜ê¸°       
+							// ¹öÆ° ÀÎµ¦½º ±¸ÇÏ±â       
 							if((event.pageX - posX) < (width/2)) {
 								$('#moviegameoutline').attr('buttonindex', 1);            
 							} else {
@@ -140,7 +138,7 @@
 							}
 						}
 						
-						// ë§Œì•½ ì˜ìƒì´ ëë‚¬ë‹¤ë©´..
+						// ¸¸¾à ¿µ»óÀÌ ³¡³µ´Ù¸é..
 						if(curVideo.ended) {
 							//alert('ended movie');
 							moviegameEndedEvent();
@@ -152,7 +150,7 @@
 			    	
 			    	//alert(event.pageX + ', ' + event.pageY + ' , ' + width + ' , ' + height);    	
 			    	if(event.pageY > (height*0.7)) {
-						// ì¬ìƒ, ì¼ì‹œì •ì§€
+						// Àç»ı, ÀÏ½ÃÁ¤Áö
 						if(curVideo.paused) {				
 							curVideo.play();
 						} else {
@@ -163,7 +161,7 @@
 						var btnTime = $('#moviegameoutline').attr('selecttime');
 						
 						if(curVideoTime >= btnTime) {
-							// ë²„íŠ¼ ì¸ë±ìŠ¤ êµ¬í•˜ê¸°       
+							// ¹öÆ° ÀÎµ¦½º ±¸ÇÏ±â       
 							if(event.pageX < (width/2)) {
 								$('#moviegameoutline').attr('buttonindex', 1);            
 							} else {
@@ -171,7 +169,7 @@
 							}
 						}
 						
-						// ë§Œì•½ ì˜ìƒì´ ëë‚¬ë‹¤ë©´..
+						// ¸¸¾à ¿µ»óÀÌ ³¡³µ´Ù¸é..
 						if(curVideo.ended) {
 							//alert('ended movie');
 							moviegameEndedEvent();
@@ -181,7 +179,7 @@
 			});
 			
 			///
-			/// MovieGameIem ì»¨íŠ¸ë¡¤ - ì „ì²´í™”ë©´
+			/// MovieGameIem ÄÁÆ®·Ñ - ÀüÃ¼È­¸é
 			///
 			$('#moviegameoutline').dblclick(function(event) {		
 				var curVideo = document.getElementById("moviegameoutline");  
@@ -211,7 +209,7 @@
 			});				
 			
 			///
-			/// MovieGame ì´ ëë‚¬ì„ ë•Œ    
+			/// MovieGame ÀÌ ³¡³µÀ» ¶§    
 			///
 		    function moviegameEndedEvent() {
 		    	
@@ -231,7 +229,7 @@
 		            	// GameEnd
 		            	if(nextmovie == '') {
 		            		$('#moviegameoutline').empty();
-		            		alert('ì¶•í•˜í•©ë‹ˆë‹¤!');		// í•œê¸€ ê¹¨ì§, ì—¬ëŸ¬ë²ˆ í˜¸ì¶œë¨..
+		            		alert('ÃàÇÏÇÕ´Ï´Ù!');		// ÇÑ±Û ±úÁü, ¿©·¯¹ø È£ÃâµÊ..
 		            		return;
 		            	}
 		            	
@@ -264,7 +262,7 @@
 						$('#moviegameoutline').attr('mfno', nextmovie.mfno);
 						$('#moviegameoutline').attr('selecttime', nextmovie.movieselecttime);					
 						
-						$('#moviegameoutline').on('ended', moviegameEndedEvent);		// ended ì´ë²¤íŠ¸ë¥¼ ë‹¤ì‹œ ì—°ê²°í•´ì¤€ë‹¤. 
+						$('#moviegameoutline').on('ended', moviegameEndedEvent);		// ended ÀÌº¥Æ®¸¦ ´Ù½Ã ¿¬°áÇØÁØ´Ù. 
 						$('#moviegameoutline').on('canplay', moviegameCanPlayEvent);
 						
 		            	var curVideo = document.getElementById("moviegameoutline"); 
@@ -288,7 +286,7 @@
 		  	
 			
 			
-			// ìµœì´ˆ ë³´ì—¬ì§ˆ ì˜ìƒì„ ê°€ì ¸ì˜¨ë‹¤. json ìœ¼ë¡œ ë¦¬í„´ë°›ê²Œ ìˆ˜ì •í•˜ë©´ ì¢‹ì„ë“¯...
+			// ÃÖÃÊ º¸¿©Áú ¿µ»óÀ» °¡Á®¿Â´Ù. json À¸·Î ¸®ÅÏ¹Ş°Ô ¼öÁ¤ÇÏ¸é ÁÁÀ»µí...
 			//$.getJSON("/hello", function(data) {
 				//console.log(data);
 			//});
