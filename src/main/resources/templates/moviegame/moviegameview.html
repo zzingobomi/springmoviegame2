@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org"
+﻿<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout1}">
 	
@@ -53,25 +53,242 @@
 
 <th:block layout:fragment="script">
 
-	<script th:inline="javascript" th:src="${'/js/moviegameview.js'}"></script>
+	<script th:inline="javascript" th:src="${'/js/moviegameview.js'}" ></script>
 
-	<script th:inline="javascript">
+	<script th:inline="javascript" >
 		$(window).on('load', function() {		
 			
 		});	
 		
 		$(document).ready(function() {	
 			
+			alert('한글깨짐');
+			
+			///
+			/// 모바일 체크
+			///	
+			function checkPlatformMobile() {
+				
+				var filter = "win16|win32|win64|mac";
+				if(navigator.platform) {
+					if(0 > filter.indexOf(navigator.platform.toLowerCase())) {
+						console.log("Mobile");
+						return true;
+					} else {
+						console.log("PC");
+						return false;
+					}
+				}
+				
+				return false;
+			}
+			
+			///
+			/// 최초 보여질 영상 가져오기
+			///
 			$.ajax({
 				type: 'get',
-				url: "/movieitemname/" + [[${vo.startmfno}]],				
-				success: function(data) {					
-					$("#moviegameoutline").append("<source src='/movievideo/" + data + ".mp4' type='video/mp4'>");				
+				url: "/movieflowinfo/" + [[${vo.startmfno}]],				
+				success: function(movieflowinfo) {						
+					
+					$("#moviegameoutline").attr('buttonindex', 0);
+					$('#moviegameoutline').attr('mfno', movieflowinfo.mfno);
+					$('#moviegameoutline').attr('selecttime', movieflowinfo.movieselecttime);
+					$("#moviegameoutline").append("<source src='/movievideo/" + movieflowinfo.filename + ".mp4' type='video/mp4'>");				
 				}				
 			});
 			
+			///
+			/// moviegameEndedEvent 이벤트를 연결해 준다.
+			///
+			$('#moviegameoutline').on('ended', moviegameEndedEvent);		
 			
-			// ���� ������ ������ �����´�. json ���� ���Ϲް� �����ϸ� ������...
+			
+			///
+			/// MovieGameIem 컨트롤 - 재생, 일시정지, 버튼 인덱스
+			///
+			$('#moviegameoutline').click(function(event) { 		
+				var curVideo = document.getElementById("moviegameoutline");  
+
+				if(!document.fullscreenElement && !document.mozFullScreenElement && 
+		    		!document.webkitFullscreenElement && !document.msFullscreenElement) {
+		    	
+			    	var width = $(this).width();
+			    	var height = $(this).height();	    	
+			    
+			    	var posX = $(this).offset().left,
+			            posY = $(this).offset().top;
+			          
+			        //alert((event.pageX - posX) + ' , ' + (event.pageY - posY) + ' , ' + width + ' , ' + height);    // normal
+			        if((event.pageY - posY) > (height*0.7)) {
+						// 재생, 일시정지
+						if(curVideo.paused) {				
+							curVideo.play();
+						} else {
+							curVideo.pause();
+						} 
+					} else {
+						var curVideoTime = curVideo.currentTime;
+						var btnTime = $('#moviegameoutline').attr('selecttime');				
+					
+						if(curVideoTime >= btnTime) {				
+							// 버튼 인덱스 구하기       
+							if((event.pageX - posX) < (width/2)) {
+								$('#moviegameoutline').attr('buttonindex', 1);            
+							} else {
+								$('#moviegameoutline').attr('buttonindex', 2);  
+							}
+						}
+						
+						// 만약 영상이 끝났다면..
+						if(curVideo.ended) {
+							//alert('ended movie');
+							moviegameEndedEvent();
+						} 
+					}		
+		    	} else {
+		    		var width = screen.availWidth;
+			    	var height = screen.availHeight;  
+			    	
+			    	//alert(event.pageX + ', ' + event.pageY + ' , ' + width + ' , ' + height);    	
+			    	if(event.pageY > (height*0.7)) {
+						// 재생, 일시정지
+						if(curVideo.paused) {				
+							curVideo.play();
+						} else {
+							curVideo.pause();
+						} 
+					} else {
+						var curVideoTime = curVideo.currentTime;
+						var btnTime = $('#moviegameoutline').attr('selecttime');
+						
+						if(curVideoTime >= btnTime) {
+							// 버튼 인덱스 구하기       
+							if(event.pageX < (width/2)) {
+								$('#moviegameoutline').attr('buttonindex', 1);            
+							} else {
+								$('#moviegameoutline').attr('buttonindex', 2);  
+							}
+						}
+						
+						// 만약 영상이 끝났다면..
+						if(curVideo.ended) {
+							//alert('ended movie');
+							moviegameEndedEvent();
+						} 
+					}
+		    	}
+			});
+			
+			///
+			/// MovieGameIem 컨트롤 - 전체화면
+			///
+			$('#moviegameoutline').dblclick(function(event) {		
+				var curVideo = document.getElementById("moviegameoutline");  
+		    	
+		    	if(!document.fullscreenElement && !document.mozFullScreenElement && 
+		    		!document.webkitFullscreenElement && !document.msFullscreenElement) {
+		    		if (curVideo.requestFullscreen) {			
+						curVideo.requestFullscreen();
+		    		} else if (curVideo.msRequestFullScreen) {
+		    			curVideo.msRequestFullScreen();
+					} else if (curVideo.mozRequestFullScreen) {
+						curVideo.mozRequestFullScreen();
+					} else if (curVideo.webkitRequestFullscreen) {
+						curVideo.webkitRequestFullscreen();
+					}    		
+		    	} else {
+		    		if (document.exitFullscreen) {			
+						document.exitFullscreen();
+					} else if (document.msExitFullscreen) {
+				    	document.msExitFullscreen();
+					} else if (document.mozCancelFullScreen) {
+				    	document.mozCancelFullScreen();
+					} else if (document.webkitExitFullscreen) {
+				    	document.webkitExitFullscreen();
+					} 
+		    	}    
+			});				
+			
+			///
+			/// MovieGame 이 끝났을 때    
+			///
+		    function moviegameEndedEvent() {
+		    	
+		    	var curMovieMFNO = $('#moviegameoutline').attr('mfno');
+		    	var curButtonIndex = $('#moviegameoutline').attr('buttonindex');
+		    	
+		    	console.log(curMovieMFNO);
+		    	console.log(curButtonIndex);
+				
+		    	$.ajax({		          
+		            type: 'get',
+					url: "/movienextflowinfo/" + curMovieMFNO + "/" + curButtonIndex,		           
+		            success: function(nextmovie) {   
+		            	
+		            	console.log(nextmovie);
+		            	
+		            	// GameEnd
+		            	if(nextmovie == '') {
+		            		$('#moviegameoutline').empty();
+		            		alert('축하합니다!');		// 한글 깨짐, 여러번 호출됨..
+		            		return;
+		            	}
+		            	
+		            	// Not Selected
+		            	if(nextmovie.mfno == -1) {
+		            		console.log('do not selected');
+		            		return;
+		            	}
+		            	
+		            	//console.log(nextmovie.mfno);
+		            	//console.log(nextmovie.filename);
+		            	//console.log(nextmovie.movietotaltime);
+		            	//console.log(nextmovie.movieselecttime);
+		            	
+		            	var nextMovieName = nextmovie.filename;
+		            	if(checkPlatformMobile()) {
+		            		nextMovieName += "_mobile";
+		            	} 	
+		            	
+		            	var strSrc = "/movievideo/" + nextMovieName + ".mp4";    
+		            	console.log(strSrc);
+		            	
+		            	$('#moviegameoutline').empty();
+						$('<source />', {
+							type: 'video/mp4',
+							src: strSrc
+						}).appendTo($('#moviegameoutline'));						
+						
+						$('#moviegameoutline').attr('buttonindex', 0);
+						$('#moviegameoutline').attr('mfno', nextmovie.mfno);
+						$('#moviegameoutline').attr('selecttime', nextmovie.movieselecttime);					
+						
+						$('#moviegameoutline').on('ended', moviegameEndedEvent);		// ended 이벤트를 다시 연결해준다. 
+						$('#moviegameoutline').on('canplay', moviegameCanPlayEvent);
+						
+		            	var curVideo = document.getElementById("moviegameoutline"); 
+		            	curVideo.load();	
+		            }		            
+		        });    	
+		    }	
+			
+			
+			///
+			/// moviegameCanPlayEvent
+			///
+		    //$('#moviegameoutline').on('canplay', moviegameCanPlayEvent);    
+		    function moviegameCanPlayEvent() {    
+		    	//alert('canPlay');
+		    	var curVideo = document.getElementById("moviegameoutline");      	
+		    	curVideo.play();
+		    } 
+			
+			
+		  	
+			
+			
+			// 최초 보여질 영상을 가져온다. json 으로 리턴받게 수정하면 좋을듯...
 			//$.getJSON("/hello", function(data) {
 				//console.log(data);
 			//});
