@@ -51,6 +51,30 @@ public class SampleController {
 		movieGameItemRepository.save(movie1);
 		
 		
+		// InTheRoom
+		MovieGameItem intheroom = new MovieGameItem();
+		intheroom.setTitle("InTheRoom");
+		intheroom.setDirector("zzingo");
+		intheroom.setDescription("This is InTheRoom");
+		intheroom.setPoster("intheroomposter");
+		intheroom.setStartmfno(1L);
+		
+		movieGameItemRepository.save(intheroom);
+		
+		
+		// InTheRoom
+		MovieGameItem tutorial = new MovieGameItem();
+		tutorial.setTitle("Tutorial");
+		tutorial.setDirector("zzingo");
+		tutorial.setDescription("This is Tutorial");
+		tutorial.setPoster("tutorialposter");
+		tutorial.setStartmfno(1L);
+		
+		movieGameItemRepository.save(tutorial);
+				
+				
+		
+		
 		///
 		/// MovieFlowInfo
 		///
