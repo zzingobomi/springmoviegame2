@@ -68,7 +68,7 @@ public class SampleController {
 		tutorial.setDirector("zzingo");
 		tutorial.setDescription("This is Tutorial");
 		tutorial.setPoster("tutorialposter");
-		tutorial.setStartmfno(1L);
+		tutorial.setStartmfno(11L);
 		
 		movieGameItemRepository.save(tutorial);
 				
